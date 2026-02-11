@@ -1,0 +1,368 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Valentine day ❤️</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Lato:wght@300;400;700&family=Dancing+Script:wght@600&display=swap" rel="stylesheet" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+
+    <style>
+      :root {
+        --paper-bg: #fdf5e6;
+        --tape-color: rgba(255, 200, 220, 0.6);
+        --deep-pink: #d81b60;
+        --text-color: #4a4a4a;
+        --heart-color: #ff4d6d;
+        --soft-pink: #fce4ec;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: "Lato", sans-serif;
+        background-color: var(--paper-bg);
+        color: var(--text-color);
+        overflow-x: hidden;
+        line-height: 1.6;
+      }
+
+      /* --- Background Hearts --- */
+      #heart-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      .heart-particle {
+        position: absolute;
+        color: var(--heart-color);
+        opacity: 0.4;
+        animation: fly linear infinite;
+      }
+
+      @keyframes fly {
+        0% {
+          transform: translateY(100vh) scale(0);
+          opacity: 0;
+        }
+        50% {
+          opacity: 0.6;
+        }
+        100% {
+          transform: translateY(-10vh) scale(1.5);
+          opacity: 0;
+        }
+      }
+
+      /* --- Music Player Widget --- */
+      #music-player {
+        position: fixed;
+        bottom: 25px;
+        left: 25px;
+        z-index: 1000;
+        background: rgba(255, 255, 255, 0.9);
+        padding: 12px 20px;
+        border-radius: 50px;
+        display: flex;
+        align-items: center;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        border: 2px solid var(--soft-pink);
+      }
+
+      #play-btn {
+        background: var(--deep-pink);
+        border: none;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        color: white;
+        cursor: pointer;
+        margin-right: 12px;
+        font-size: 1.2rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      /* --- Hero Section --- */
+      .hero {
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        background:
+          linear-gradient(rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.3)),
+          url("https://images.unsplash.com/photo-1518199266791-5375a83190b7?q=80&w=1500") center/cover;
+      }
+
+      .hero-content {
+        background: rgba(255, 255, 255, 0.8);
+        padding: 50px;
+        border-radius: 20px;
+        backdrop-filter: blur(8px);
+        border: 2px solid white;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        data-aos: zoom-in;
+      }
+
+      h1 {
+        font-family: "Playfair Display", serif;
+        font-size: 3.5rem;
+        color: var(--deep-pink);
+      }
+      .hero p {
+        font-family: "Dancing Script", cursive;
+        font-size: 1.8rem;
+        margin-top: 10px;
+      }
+
+      /* --- Scrapbook Grid --- */
+      .container {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 100px 20px;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 50px;
+        z-index: 1;
+        position: relative;
+      }
+
+      .item {
+        background: white;
+        padding: 15px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        position: relative;
+        transition: 0.4s;
+      }
+
+      .item:hover {
+        transform: scale(1.05) rotate(0deg) !important;
+        z-index: 10;
+      }
+
+      .item img,
+      .item video {
+        width: 100%;
+        border-radius: 2px;
+        margin-bottom: 10px;
+      }
+
+      .tape {
+        position: absolute;
+        width: 90px;
+        height: 25px;
+        background: var(--tape-color);
+        top: -10px;
+        left: 50%;
+        transform: translateX(-50%) rotate(-2deg);
+      }
+
+      .caption {
+        font-family: "Lato", sans-serif;
+        text-align: center;
+        font-style: italic;
+        font-size: 0.9rem;
+      }
+
+      .text-note {
+        background: #fff9c4;
+        padding: 30px;
+        font-family: "Dancing Script", cursive;
+        font-size: 1.5rem;
+        box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.05);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+      }
+
+      /* --- Footer & Typing --- */
+      footer {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background: var(--soft-pink);
+        text-align: center;
+        padding: 40px;
+        clip-path: polygon(0 15%, 100% 0, 100% 100%, 0 100%);
+      }
+
+      #typing-text {
+        font-family: "Dancing Script", cursive;
+        font-size: 2.5rem;
+        color: var(--deep-pink);
+        max-width: 600px;
+        min-height: 150px;
+      }
+
+      .cursor {
+        animation: blink 0.7s infinite;
+        font-weight: bold;
+        color: var(--deep-pink);
+      }
+      @keyframes blink {
+        0%,
+        100% {
+          opacity: 0;
+        }
+        50% {
+          opacity: 1;
+        }
+      }
+
+      @media (max-width: 600px) {
+        h1 {
+          font-size: 2.2rem;
+        }
+        #typing-text {
+          font-size: 1.8rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="heart-container"></div>
+
+    <div id="music-player">
+      <button id="play-btn">▶</button>
+      <span id="music-status">Play Our Story</span>
+      <audio id="bg-music" loop>
+        <source src="Elvis Presley - Can't Help Falling in Love Lyrics.mp3" type="audio/mpeg" />
+      </audio>
+    </div>
+
+    <header class="hero">
+      <div class="hero-content" data-aos="fade-up">
+        <h1>Happy Valentin`s Day!!!</h1>
+        <p>Klik play dan nikmati...</p>
+      </div>
+    </header>
+
+    <div class="container">
+      <div class="item" style="transform: rotate(-3deg)" data-aos="fade-right">
+        <div class="tape"></div>
+        <img src="bernadya.jpg" alt="Momen 1" />
+        <p class="caption">Waktu pertama kali kita jalan bareng.</p>
+      </div>
+
+      <div class="item text-note" style="transform: rotate(2deg)" data-aos="fade-left">"Aku nggak pernah sangka hari itu bakal jadi awal dari cerita kita yang paling indah."</div>
+
+      <div class="item" style="transform: rotate(1deg)" data-aos="fade-up">
+        <div class="tape"></div>
+        <img src="ber.jpeg" alt="Momen 2" />
+        <p class="caption">Momen yang nggak akan pernah aku lupakan.</p>
+      </div>
+
+      <div class="item" style="transform: rotate(-2deg)" data-aos="fade-right">
+        <div class="tape"></div>
+        <img src="bernad.jpeg" alt="Momen 3" />
+        <p class="caption">Terima kasih sudah selalu ada.</p>
+      </div>
+
+      <div class="item text-note" style="transform: rotate(-1deg)" data-aos="fade-left">"Setiap tawa kamu adalah alasan aku buat selalu bersyukur setiap hari."</div>
+
+      <div class="item" style="transform: rotate(3deg)" data-aos="fade-up">
+        <div class="tape"></div>
+        <img src="bernadya1.jpeg" alt="Momen 4" />
+        <p class="caption">To more memories together!</p>
+      </div>
+    </div>
+
+    <footer id="final-footer">
+      <div id="typing-text"></div>
+      <p style="margin-top: 50px; font-size: 1.2rem; color: #d81b60">Happy Valentine's Day! ❤️</p>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      AOS.init({ duration: 1000 });
+
+      const audio = document.getElementById("bg-music");
+      const playBtn = document.getElementById("play-btn");
+      const musicStatus = document.getElementById("music-status");
+      let scrollInterval;
+
+      // --- Fitur Auto Scroll ---
+      function startAutoScroll() {
+        scrollInterval = setInterval(() => {
+          window.scrollBy(0, 1);
+        }, 40); // Kecepatan scroll (semakin kecil angka semakin cepat)
+      }
+
+      function stopAutoScroll() {
+        clearInterval(scrollInterval);
+      }
+
+      // --- Music Logic ---
+      playBtn.addEventListener("click", () => {
+        if (audio.paused) {
+          audio.play();
+          playBtn.innerHTML = "⏸";
+          musicStatus.innerText = "Memutar Cerita Kita...";
+          startAutoScroll();
+        } else {
+          audio.pause();
+          playBtn.innerHTML = "▶";
+          musicStatus.innerText = "Lanjut Putar?";
+          stopAutoScroll();
+        }
+      });
+
+      // Hentikan auto-scroll jika user interaksi manual
+      window.addEventListener("wheel", stopAutoScroll);
+      window.addEventListener("touchstart", stopAutoScroll);
+
+      // --- Floating Hearts ---
+      function createHeart() {
+        const container = document.getElementById("heart-container");
+        const heart = document.createElement("div");
+        heart.classList.add("heart-particle");
+        heart.innerHTML = "❤️";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.animationDuration = Math.random() * 3 + 3 + "s";
+        heart.style.fontSize = Math.random() * 10 + 15 + "px";
+        container.appendChild(heart);
+        setTimeout(() => heart.remove(), 6000);
+      }
+      setInterval(createHeart, 400);
+
+      // --- Typing Effect ---
+      const message = "Terima kasih sudah menjadi bagian terindah dalam perjalananku. Aku nggak butuh kado mewah, karena memilikimu sudah lebih dari cukup. I love you more than words can say...";
+      let index = 0;
+      let hasTyped = false;
+
+      function typeEffect() {
+        if (index < message.length) {
+          document.getElementById("typing-text").innerHTML += message.charAt(index);
+          index++;
+          setTimeout(typeEffect, 80);
+        }
+      }
+
+      window.addEventListener("scroll", () => {
+        const footerPos = document.getElementById("final-footer").getBoundingClientRect().top;
+        if (footerPos < window.innerHeight - 100 && !hasTyped) {
+          hasTyped = true;
+          typeEffect();
+        }
+      });
+    </script>
+  </body>
+</html>
